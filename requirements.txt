@@ -1,0 +1,7 @@
+pydantic
+SQLAlchemy
+psycopg2-binary
+python-dotenv
+SQLModel
+faker
+numpy
