@@ -8,19 +8,10 @@ from .base import Command
 
 # Команда для инициализации таблицы users
 class CreateTableCommand(Command):
-    # Создаем таблицы по ORM модели
     def run(self):
         self.ensure_database()
-        with get_session() as session:
-            inspector = inspect(engine)
-            if not inspector.has_table("users"):
-                print("Creating tables...")
-                users.metadata.create_all(engine)
-                print("Tables created successfully.")
-            else:
-                print("Database and tables already exist.")
-                
-    # Проверяем, существует ли база данных, если нет, то создаем её
+        self.create_tables_if_not_exists()
+
     def ensure_database(self):
         with psycopg2.connect(admin_url) as con:
             con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
@@ -31,6 +22,17 @@ class CreateTableCommand(Command):
                     print(f"Database '{dbname}' created.")
                 else:
                     print(f"Database '{dbname}' already exists.")
+
+    def create_tables_if_not_exists(self):
+        with get_session() as session:
+            inspector = inspect(engine)
+            if not inspector.has_table("users"):
+                print("Creating tables...")
+                users.metadata.create_all(engine)
+                print("Tables created successfully.")
+            else:
+                print("Database and tables already exist.")
+
 
     
 
