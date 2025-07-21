@@ -9,3 +9,4 @@ def timer(func):
         print(f"Execution time for {func.__name__}: {end - start}")
         return result
     return wrapper
+

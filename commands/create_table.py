@@ -3,7 +3,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from config import admin_url, dbname
 from sqlalchemy import inspect
 from database import engine, get_session
-from models import users
+from models import Users
 from .base import Command
 
 # Команда для инициализации таблицы users
@@ -28,7 +28,7 @@ class CreateTableCommand(Command):
             inspector = inspect(engine)
             if not inspector.has_table("users"):
                 print("Creating tables...")
-                users.metadata.create_all(engine)
+                Users.metadata.create_all(engine)
                 print("Tables created successfully.")
             else:
                 print("Database and tables already exist.")

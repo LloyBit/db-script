@@ -10,7 +10,7 @@ class OptimizeQueryCommand(Command):
             cursor = conn.cursor()
             # Создадим составной индекс
             cursor.execute("""
-                CREATE INDEX idx_users_gender_fullname
+                CREATE INDEX idx_user_gender_fullname
                 ON users(gender, full_name);
             """)
             conn.commit()

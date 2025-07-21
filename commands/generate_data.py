@@ -5,7 +5,7 @@ import numpy as np
 from .base import Command
 
 class GenerateDataCommand(Command):
-    def __init__(self, fn_pool=100, ln_pool=10, mn_pool=10, date_pool=10):
+    def __init__(self, fn_pool=10, ln_pool=1000, mn_pool=10, date_pool=10):
         self.fake = Faker()
         self.date_pool_arr = np.array([
             self.fake.date_of_birth(minimum_age=18, maximum_age=80) for _ in range(date_pool)
